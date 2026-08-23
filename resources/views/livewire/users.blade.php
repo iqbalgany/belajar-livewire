@@ -1,9 +1,17 @@
-<div>
-    <h1 class="text-3xl font-bold">{{ $title }}</h1>
+<div class="w-1/2 m-auto my-10">
+    <h1 class="text-3xl font-semibold">{{ $title }}</h1>
 
     <p>Users count: {{ count($users) }}</p>
 
-    @foreach ($users as $user)
-        <div>{{ $user->name }}</div>
-    @endforeach
+
+    <button wire:click="createUser" type="button"
+        class="text-white bg-blue-500 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 my-2 cursor-pointer">Create
+        User</button>
+
+    <hr class="text-2xl font-bold mb-2">User List</h2>
+    <ul class="list-disc">
+        @foreach ($users as $user)
+            <li>{{ $user->name }}</li>
+        @endforeach
+    </ul>
 </div>

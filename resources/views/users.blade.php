@@ -9,14 +9,17 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    @livewireStyles
 </head>
 
 <body>
 
-    <livewire:users />
+    <div class="flex justify-center gap-10 px-5">
 
-    @livewireScripts
+        @livewire('users-register-form')
+        @livewire('users-list')
+    </div>
+
+
 </body>
 
 </html>

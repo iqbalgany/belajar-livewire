@@ -7,11 +7,12 @@ use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
 class Users extends Component
 {
 
-    use WithFileUploads;
+    use WithFileUploads, WithPagination;
 
     #[Validate('required|min:3')]
     public $name = '';
@@ -28,18 +29,18 @@ class Users extends Component
 
     public function createNewUser()
     {
-        $validated = $this->validate();
+        $this->validate();
 
 
         if ($this->avatar && is_object($this->avatar)) {
-            $this->avatar->store('avatar', 'public');
+            $avatarPath = $this->avatar->store('avatar', 'public');
         }
 
         User::create([
             'name' => $this->name,
             'email' =>  $this->email,
             'password' => Hash::make($this->password),
-            'avatar' => $validated['avatar'],
+            'avatar' => $avatarPath,
         ]);
 
         $this->reset();
@@ -51,7 +52,7 @@ class Users extends Component
     {
         return view('livewire.users', [
             'title' => 'Users Page',
-            'users' => User::latest()->paginate(5),
+            'users' => User::latest()->paginate(6),
         ]);
     }
 }

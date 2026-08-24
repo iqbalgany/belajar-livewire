@@ -25,8 +25,16 @@ class UsersList extends Component
         $this->resetPage();
     }
 
+    public function placeholder()
+    {
+        return view('livewire.placeholders.skeleton');
+    }
+
     public function render()
     {
+
+        sleep(1);
+
         return view('livewire.users-list', [
             'title' => 'Users Page',
             'users' => User::latest()
